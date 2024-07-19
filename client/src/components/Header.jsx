@@ -3,7 +3,7 @@ const Header = () => {
     <header>
       <div className="wrap header--flex">
         <h1 className="header--logo">
-          <a href="index.html">Courses</a>
+          <a href="/">Courses</a>
         </h1>
         <nav>
           <ul className="header--signedout">
