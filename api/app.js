@@ -19,13 +19,7 @@ const enableGlobalErrorLogging =
 const app = express();
 
 // Use the CORS middleware
-app.use(
-  cors({
-    origin: "http://localhost:5000",
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type"],
-  })
-);
+app.use(cors());
 
 // Morgan for http request logging
 app.use(morgan("dev"));
