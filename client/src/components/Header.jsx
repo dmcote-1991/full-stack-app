@@ -1,17 +1,19 @@
+import { Link } from "react-router-dom";
+
 const Header = () => {
   return (
     <header>
       <div className="wrap header--flex">
         <h1 className="header--logo">
-          <a href="/">Courses</a>
+          <Link to="/">Courses</Link>
         </h1>
         <nav>
           <ul className="header--signedout">
             <li>
-              <a href="sign-up.html">Sign Up</a>
+              <Link to="/signup">Sign Up</Link>
             </li>
             <li>
-              <a href="/signin">Sign In</a>
+              <Link to="/signin">Sign In</Link>
             </li>
           </ul>
         </nav>
