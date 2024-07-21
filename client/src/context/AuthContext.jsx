@@ -7,7 +7,7 @@ export const AuthProvider = ({ children }) => {
 
   const signIn = async (credentials) => {
     try {
-      const response = await fetch("/api/signin", {
+      const response = await fetch("http://localhost:5000/api/signin", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -27,7 +27,7 @@ export const AuthProvider = ({ children }) => {
 
   const signOut = async () => {
     try {
-      await fetch("/api/signout", { method: "POST" });
+      await fetch("http://localhost:5000/api/signout", { method: "POST" });
       setUser(null);
     } catch (error) {
       console.error("Sign-out error:", error);
