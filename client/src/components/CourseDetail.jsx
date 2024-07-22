@@ -50,6 +50,10 @@ const CourseDetail = () => {
 
   if (!course) return <div>Loading...</div>;
 
+  const isCourseOwner = () => {
+    return authUser && course.user && authUser.id === course.user.id;
+  };
+
   const materialsMarkdown = course.materialsNeeded
     ? course.materialsNeeded
         .split("\n")
@@ -61,12 +65,17 @@ const CourseDetail = () => {
     <main>
       <div className="actions--bar">
         <div className="wrap">
-          <Link className="button" to={`/courses/${id}/update`}>
-            Update Course
-          </Link>
-          <button className="button" onClick={handleDelete}>
-            Delete Course
-          </button>
+          {/* Conditionally render Update and Delete buttons based on ownership */}
+          {isCourseOwner() && (
+            <>
+              <Link className="button" to={`/courses/${id}/update`}>
+                Update Course
+              </Link>
+              <button className="button" onClick={handleDelete}>
+                Delete Course
+              </button>
+            </>
+          )}
           <Link className="button button-secondary" to="/">
             Return to List
           </Link>
@@ -79,7 +88,12 @@ const CourseDetail = () => {
           <div>
             <h3 className="course--detail--title">Course</h3>
             <h4 className="course--name">{course.title}</h4>
-            <p>By {course.author}</p>
+            <p>
+              By{" "}
+              {course.user
+                ? `${course.user.firstName} ${course.user.lastName}`
+                : "Unknown Author"}
+            </p>
 
             <ReactMarkdown>{course.description}</ReactMarkdown>
           </div>
