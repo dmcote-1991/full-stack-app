@@ -1,17 +1,24 @@
 import { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
+import { useAuth } from "../context/AuthContext";
 
 const CourseDetail = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
+  const { user: authUser } = useAuth();
   const [course, setCourse] = useState(null);
 
   useEffect(() => {
     const fetchCourse = async () => {
       try {
         const response = await fetch(`http://localhost:5000/api/courses/${id}`);
-        const data = await response.json();
-        setCourse(data);
+        if (response.ok) {
+          const data = await response.json();
+          setCourse(data);
+        } else {
+          console.error("Error fetching course:", response.statusText);
+        }
       } catch (error) {
         console.error("Error fetching course:", error);
       }
@@ -19,6 +26,27 @@ const CourseDetail = () => {
 
     fetchCourse();
   }, [id]);
+
+  const handleDelete = async () => {
+    try {
+      const response = await fetch(`http://localhost:5000/api/courses/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Basic ${btoa(
+            `${authUser.emailAddress}:${authUser.password}`
+          )}`,
+        },
+      });
+      if (response.ok) {
+        navigate("/");
+      } else {
+        console.error("Error deleting course:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error deleting course:", error);
+    }
+  };
 
   if (!course) return <div>Loading...</div>;
 
@@ -36,7 +64,9 @@ const CourseDetail = () => {
           <Link className="button" to={`/courses/${id}/update`}>
             Update Course
           </Link>
-          <button className="button">Delete Course</button>
+          <button className="button" onClick={handleDelete}>
+            Delete Course
+          </button>
           <Link className="button button-secondary" to="/">
             Return to List
           </Link>
