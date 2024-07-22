@@ -11,11 +11,11 @@ const UserSignIn = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      await signIn({ emailAddress: email, password });
+    const user = await signIn({ emailAddress: email, password });
+    if (user) {
       navigate("/");
-    } catch (err) {
-      setError("Sign-in failed. Please try again.");
+    } else {
+      setError("Sign-in failed. Please try again");
     }
   };
 

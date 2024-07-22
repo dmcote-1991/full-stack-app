@@ -7,17 +7,19 @@ export const AuthProvider = ({ children }) => {
 
   const signIn = async (credentials) => {
     try {
+      const { emailAddress, password } = credentials;
+      const authToken = btoa(`${emailAddress}:${password}`);
       const response = await fetch("http://localhost:5000/api/users", {
-        method: "POST",
+        method: "GET",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Basic ${authToken}`,
         },
-        body: JSON.stringify(credentials),
       });
       if (response.ok) {
         const data = await response.json();
-        setUser(data.user);
-        return data.user;
+        setUser({ ...data, emailAddress, password });
+        return data;
       } else {
         throw new Error("Sign-in failed");
       }
@@ -28,12 +30,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const signOut = async () => {
-    try {
-      await fetch("http://localhost:5000/api/signout", { method: "POST" });
-      setUser(null);
-    } catch (error) {
-      console.error("Sign-out error:", error);
-    }
+    setUser(null);
   };
 
   useEffect(() => {

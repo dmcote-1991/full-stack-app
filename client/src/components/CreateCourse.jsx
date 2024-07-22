@@ -34,21 +34,34 @@ const CreateCourse = () => {
         body: JSON.stringify(course),
       });
 
+      ////////
+      console.log("Response Status:", response.status);
+      console.log("Response Headers:", [...response.headers.entries()]);
+      ////////
+
       if (response.status === 201) {
-        const location = response.headers.get("location");
-        const courseId = location.split("/").pop();
-        navigate(`/courses/${courseId}`);
+        const location = response.headers.get("Location");
+        if (location) {
+          const courseId = location.split("/").pop();
+          navigate(`/courses/${courseId}`);
+        } else {
+          throw new Error("No Location header in response");
+        }
       } else if (response.status === 400) {
-        const data = await response.json();
-        setErrors(data.errors);
+        const errorData = await response.json();
+        setErrors(errorData.errors);
       } else {
-        throw new Error();
+        throw new Error("Unexpected response");
       }
     } catch (error) {
       console.error("Error creating course:", error);
       setErrors(["Error creating course. Please try again."]);
     }
   };
+
+  if (!authUser) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <main>
