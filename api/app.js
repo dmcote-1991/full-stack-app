@@ -19,7 +19,11 @@ const enableGlobalErrorLogging =
 const app = express();
 
 // Use the CORS middleware
-app.use(cors());
+const corsOptions = {
+  exposedHeaders: ["Location"],
+};
+
+app.use(cors(corsOptions));
 
 // Morgan for http request logging
 app.use(morgan("dev"));

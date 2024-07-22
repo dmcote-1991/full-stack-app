@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
 const UserSignIn = () => {
@@ -8,12 +8,14 @@ const UserSignIn = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const user = await signIn({ emailAddress: email, password });
     if (user) {
-      navigate("/");
+      const redirectTo = location.state?.from?.pathname || "/";
+      navigate(redirectTo);
     } else {
       setError("Sign-in failed. Please try again");
     }
