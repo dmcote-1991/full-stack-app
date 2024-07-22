@@ -21,7 +21,6 @@ const Header = () => {
           {user ? (
             <ul className="header--signedin">
               <li>
-                {" "}
                 Welcome, {user.firstName} {user.lastName}!
               </li>
               <li>

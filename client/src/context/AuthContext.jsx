@@ -1,4 +1,5 @@
-import { createContext, useState, useContext } from "react";
+import { createContext, useState, useContext, useEffect } from "react";
+import PropTypes from "prop-types";
 
 const AuthContext = createContext();
 
@@ -7,7 +8,7 @@ export const AuthProvider = ({ children }) => {
 
   const signIn = async (credentials) => {
     try {
-      const response = await fetch("http://localhost:5000/api/signin", {
+      const response = await fetch("http://localhost:5000/api/users", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -17,11 +18,13 @@ export const AuthProvider = ({ children }) => {
       if (response.ok) {
         const data = await response.json();
         setUser(data.user);
+        return data.user;
       } else {
         throw new Error("Sign-in failed");
       }
     } catch (error) {
       console.error("Sign-in error:", error);
+      return null;
     }
   };
 
@@ -34,11 +37,19 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  useEffect(() => {
+    console.log("AuthContext user state changed:", user);
+  }, [user]);
+
   return (
     <AuthContext.Provider value={{ user, signIn, signOut }}>
       {children}
     </AuthContext.Provider>
   );
+};
+
+AuthProvider.propTypes = {
+  children: PropTypes.node.isRequired,
 };
 
 export const useAuth = () => useContext(AuthContext);

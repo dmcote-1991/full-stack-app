@@ -12,7 +12,7 @@ const UserSignIn = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await signIn({ email, password });
+      await signIn({ emailAddress: email, password });
       navigate("/");
     } catch (err) {
       setError("Sign-in failed. Please try again.");
@@ -57,7 +57,7 @@ const UserSignIn = () => {
           </button>
         </form>
         <p>
-          Don't have a user account? Click here to{" "}
+          Don&apos;t have a user account? Click here to{" "}
           <Link to="/signup">sign up</Link>!
         </p>
       </div>
