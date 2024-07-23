@@ -1,51 +1,74 @@
 /* global.css */
+/* Apply border-box sizing to all elements for consistent box model */
 * {
     box-sizing: border-box;
 }
+
+/* Base font size for the HTML document */
 html {
     font-size: 1.25em;
 }
+
+/* Font settings for the body */
 body {
     font-family: 'Work Sans', sans-serif;
 }
+
+/* Heading 2 styles */
 h2 {
     font-size: 1.5rem;
     font-weight: 700;
     margin-bottom: 1rem;
 }
+
+/* Paragraph styles */
 p {
     font-weight: 300;
     margin-bottom: 1.5rem;
     line-height: 1.5;
-    hyphens: auto;
+    hyphens: auto; /* Allows text to break at appropriate places */
 }
+
+/* Anchor tag styles */
 a {
     color: #939;
     text-decoration: none;
 }
+
+/* Wrapper styles for centering content */
 .wrap {
     max-width: 1250px;
     margin: 0 auto;
     padding: 0 1rem;
 }
+
+/* Header styles */
 header {
     background: #57496e;
     color: #fff;
     padding: 1rem 0;
     margin-bottom: 2rem;
 }
+
+/* Flexbox layout for header content */
 .header--flex {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
+
+/* Logo styles in the header */
 .header--logo a {
     font-size: 1.25rem;
     color: #fff;
 }
+
+/* List item styles within the header */
 header li {
     font-size: .8rem;
 }
+
+/* Navigation link styles within the header */
 header nav a {
     color: #dbd;
 }
@@ -53,14 +76,19 @@ header nav a:hover {
     color: #fff;
 }
 
+/* Styles for signed-in user list items in the header */
 .header--signedin li {
     text-align: right;
     line-height: 1.25;
 }
+
+/* Styles for signed-out user list items in the header */
 .header--signedout li {
     display: inline-block;
     margin-left: .5rem;
 }
+
+/* Styles for course modules */
 .course--module {
     background: #7c689b;
     border-radius: .5rem;
@@ -68,29 +96,39 @@ header nav a:hover {
     margin-bottom: 1.5rem;
     display: block;
 }
+
+/* Course label styles */
 .course--label {
     color: #fff;
     font-size: .9rem;
     font-weight: 400;
     margin-bottom: .25rem;
 }
+
+/* Course title styles */
 .course--title {
     color: #fff;
     font-weight: 700;
     font-size: 1.25rem;
 }
+
+/* Add module styles for course modules */
 .course--add--module {
     background: #ddd9e4;
     color: #57496e;
     font-weight: 300;
     font-size: 1.25rem;
 }
+
+/* Styles for the add icon in course add module */
 .course--add--title .add {
     width: 20px;
     height: auto;
     margin-right: 5px;
     fill: #57496e;
 }
+
+/* Course detail title styles */
 .course--detail--title {
     padding-bottom: .25rem;
     border-bottom: 1px solid #888;
@@ -100,22 +138,30 @@ header nav a:hover {
     text-transform: uppercase;
     letter-spacing: 2px;
 }
+
+/* Course name styles */
 .course--name {
     font-size: 2rem;
     margin-bottom: .5rem;
     font-weight: 700;
     color: #47395e;
 }
+
+/* Course detail list styles */
 .course--detail--list {
     font-weight: 300;
     margin: 0 0 1.5rem 1rem;
     line-height: 1.5;
 }
+
+/* Actions bar styles */
 .actions--bar {
     background: #e9e5f0;
     padding: 1rem 0;
     margin: -2rem 0 2rem;
 }
+
+/* Validation errors styles */
 .validation--errors {
     background: #e9e5f0;
     padding: 1rem;
@@ -139,6 +185,7 @@ header nav a:hover {
     margin-bottom: 0;
 }
 
+/* Form centered styles */
 .form--centered {
     max-width: 510px;
     margin: 0 auto;
@@ -147,11 +194,15 @@ header nav a:hover {
 form {
     margin-bottom: 2.5rem;
 }
+
+/* Label styles */
 label {
     display: block;
     font-weight: 300;
     margin-bottom: .25rem;
 }
+
+/* Input and textarea styles */
 input, textarea {
     display: block;
     width: 100%;
@@ -166,6 +217,8 @@ input, textarea {
 textarea {
     min-height: 300px;
 }
+
+/* Button styles */
 .button {
     background: #7c689b;
     color: #fff;
@@ -187,6 +240,8 @@ textarea {
     background: #63537d;
     cursor: pointer;
 }
+
+/* Secondary button styles */
 .button-secondary {
     color: #7c689b;
     background: none;
@@ -198,12 +253,15 @@ textarea {
     box-shadow: 0 0 0 2px #63537d inset;
     cursor: pointer;
 }
+
+/* Focus styles for input, button, and textarea */
 input:focus, button:focus, .button:focus, textarea:focus {
     border: none;
     border-radius: 0;
     outline: 2px solid #332a40;
 }
 
+/* Media query for screen sizes 600px and above */
 @media screen and (min-width: 600px) {
     .header--signedin li {
         display: inline-block;
@@ -217,6 +275,8 @@ input:focus, button:focus, .button:focus, textarea:focus {
         grid-auto-rows: 1fr;
     }
 }
+
+/* Media query for screen sizes 800px and above */
 @media screen and (min-width: 800px) {
     .main--grid {
         grid-template-columns: 1fr 1fr 1fr;

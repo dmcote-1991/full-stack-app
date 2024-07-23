@@ -14,8 +14,10 @@ import UnhandledError from "./components/UnhandledError";
 const App = () => {
   return (
     <div>
+      {/* Render the header component on every page */}
       <Header />
       <Routes>
+        {/* Public Routes */}
         <Route path="/" element={<Courses />} />
         <Route path="/courses/:id" element={<CourseDetail />} />
 
@@ -25,6 +27,7 @@ const App = () => {
           <Route path="/courses/:id/update" element={<UpdateCourse />} />
         </Route>
 
+        {/* Authentication Routes */}
         <Route path="/signin" element={<UserSignIn />} />
         <Route path="/signup" element={<UserSignUp />} />
 

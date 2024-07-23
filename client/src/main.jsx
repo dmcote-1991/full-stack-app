@@ -8,6 +8,7 @@ import "./styles/reset.css";
 
 import App from "./App.jsx";
 
+// Create the root element for the React application
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter>

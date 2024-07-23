@@ -4,12 +4,15 @@ import ReactMarkdown from "react-markdown";
 import { useAuth } from "../context/AuthContext";
 
 const CourseDetail = () => {
+  // Extract course ID from URL parameters
   const { id } = useParams();
+
   const navigate = useNavigate();
   const { user: authUser } = useAuth();
   const [course, setCourse] = useState(null);
 
   useEffect(() => {
+    // Fetch course details from API
     const fetchCourse = async () => {
       try {
         const response = await fetch(`http://localhost:5000/api/courses/${id}`);
@@ -34,9 +37,11 @@ const CourseDetail = () => {
     };
 
     fetchCourse();
-  }, [id, navigate]);
+  }, [id, navigate]); // Dependencies to re-fetch if 'id' or 'navigate' changes
 
+  // Handle course deletion
   const handleDelete = async () => {
+    // Confirm deletion with user
     const confirmDelete = window.confirm(
       "Are you sure you want to delete this course? Deleting courses cannot be undone."
     );
@@ -48,6 +53,7 @@ const CourseDetail = () => {
             method: "DELETE",
             headers: {
               "Content-Type": "application/json",
+              // Basic Auth header with encoded credentials
               Authorization: `Basic ${btoa(
                 `${authUser.emailAddress}:${authUser.password}`
               )}`,
@@ -67,12 +73,15 @@ const CourseDetail = () => {
     }
   };
 
+  // Display loading message while course data is being fetched
   if (!course) return <div>Loading...</div>;
 
+  // Check if the current user is the course owner
   const isCourseOwner = () => {
     return authUser && course.user && authUser.id === course.user.id;
   };
 
+  // Convert materialsNeeded to Markdown format for ReactMarkdown
   const materialsMarkdown = course.materialsNeeded
     ? course.materialsNeeded
         .split("\n")
@@ -114,6 +123,7 @@ const CourseDetail = () => {
                 : "Unknown Author"}
             </p>
 
+            {/* Render course description using ReactMarkdown */}
             <ReactMarkdown>{course.description}</ReactMarkdown>
           </div>
           <div>
@@ -121,6 +131,7 @@ const CourseDetail = () => {
             <p>{course.estimatedTime}</p>
 
             <h3 className="course--detail--title">Materials Needed</h3>
+            {/* Render materials needed using ReactMarkdown */}
             <ReactMarkdown>{materialsMarkdown}</ReactMarkdown>
           </div>
         </div>

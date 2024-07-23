@@ -4,17 +4,23 @@ import { useAuth } from "../context/AuthContext";
 import ValidationErrors from "./ValidationErrors";
 
 const CreateCourse = () => {
+  // Retriece authenticated user from context
   const { user: authUser } = useAuth();
+
   const navigate = useNavigate();
+
+  // State variables for form fields and error messages
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [estimatedTime, setEstimatedTime] = useState("");
   const [materialsNeeded, setMaterialsNeeded] = useState("");
   const [errors, setErrors] = useState([]);
 
+  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Create course object to send in request body
     const course = {
       userId: authUser.id,
       title,
@@ -24,6 +30,7 @@ const CreateCourse = () => {
     };
 
     try {
+      // Send POST request to create a new course
       const response = await fetch("http://localhost:5000/api/courses", {
         method: "POST",
         headers: {
@@ -36,8 +43,10 @@ const CreateCourse = () => {
       });
 
       if (response.status === 201) {
+        // If creation is successful, navigate to the new course's detail page
         const location = response.headers.get("Location");
         if (location) {
+          // Extract course ID from Location header
           const courseId = location.split("/").pop();
           navigate(`/courses/${courseId}`);
         } else {
@@ -58,6 +67,7 @@ const CreateCourse = () => {
     }
   };
 
+  // Display a loading message if the user is not authenticated yet
   if (!authUser) {
     return <div>Loading...</div>;
   }

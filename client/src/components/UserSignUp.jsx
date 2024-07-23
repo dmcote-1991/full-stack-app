@@ -4,8 +4,12 @@ import { useAuth } from "../context/AuthContext";
 import ValidationErrors from "./ValidationErrors";
 
 const UserSignUp = () => {
+  // Destructure signIn from the authentication context
   const { signIn } = useAuth();
+
   const navigate = useNavigate();
+
+  // Local state for user inputs and errors
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -13,14 +17,17 @@ const UserSignUp = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState([]);
 
+  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Check if password and confirmPassword match
     if (password !== confirmPassword) {
       setErrors(["Passwords do not match"]);
       return;
     }
 
+    // Create new user object
     const newUser = {
       firstName,
       lastName,
@@ -29,6 +36,7 @@ const UserSignUp = () => {
     };
 
     try {
+      // Send POST request to create new user
       const response = await fetch("http://localhost:5000/api/users", {
         method: "POST",
         headers: {
@@ -37,26 +45,30 @@ const UserSignUp = () => {
         body: JSON.stringify(newUser),
       });
 
+      // Handle different response statuses
       if (response.status === 201) {
+        // Attempt to sign in the newly created user
         const signInSuccess = await signIn({ emailAddress: email, password });
         if (signInSuccess) {
-          navigate("/");
+          navigate("/"); // Redirect to home if sign-in is successful
         } else {
           setErrors(["Failed to sign in after account creation."]);
           navigate("/error");
         }
       } else if (response.status === 400) {
+        // Set validation errors if there are any
         const errorData = await response.json();
         setErrors(errorData.errors);
       } else if (response.status === 500) {
+        // Redirect to error page on server error
         navigate("/error");
       } else {
-        throw new Error("Unexpected response");
+        throw new Error("Unexpected response"); // Handle unexpected responses
       }
     } catch (error) {
       console.error("Error signing up:", error);
       setErrors(["Error signing up. Please try again."]);
-      navigate("/error");
+      navigate("/error"); // Redirect on error
     }
   };
 
@@ -64,6 +76,7 @@ const UserSignUp = () => {
     <main>
       <div className="form--centered">
         <h2>Sign Up</h2>
+        {/* Display validation errors, if any */}
         <ValidationErrors errors={errors} />
         <form onSubmit={handleSubmit}>
           <label htmlFor="firstName">First Name</label>

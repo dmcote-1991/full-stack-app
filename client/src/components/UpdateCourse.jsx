@@ -4,9 +4,14 @@ import { useAuth } from "../context/AuthContext";
 import ValidationErrors from "./ValidationErrors";
 
 const UpdateCourse = () => {
+  // Get the course ID from the URL parameters
   const { id } = useParams();
+
   const navigate = useNavigate();
+
+  // Destructure the authenticated user from the context
   const { user: authUser } = useAuth();
+  // State to hold course data
   const [course, setCourse] = useState({
     title: "",
     description: "",
@@ -14,11 +19,14 @@ const UpdateCourse = () => {
     materialsNeeded: "",
     user: {},
   });
+  // State to hold validation errors
   const [errors, setErrors] = useState([]);
 
+  // Fetch course details when the component mounts or when 'id' or 'authUser.id' changes
   useEffect(() => {
     const fetchCourseDetails = async () => {
       try {
+        // Fetch the course details from the API
         const response = await fetch(`http://localhost:5000/api/courses/${id}`);
         if (response.ok) {
           const data = await response.json();
@@ -27,7 +35,7 @@ const UpdateCourse = () => {
           } else if (authUser.id !== data.user.id) {
             navigate("/forbidden");
           } else {
-            setCourse(data);
+            setCourse(data); // Set course data in state
           }
         } else if (response.status === 404) {
           navigate("/notfound");
@@ -43,16 +51,19 @@ const UpdateCourse = () => {
     };
 
     fetchCourseDetails();
-  }, [id, navigate, authUser.id]);
+  }, [id, navigate, authUser.id]); // Dependencies to re-fetch if 'id', 'navigate', or 'authUser.id' changes
 
+  // Handle changes to form inputs
   const handleChange = (e) => {
     const { name, value } = e.target;
     setCourse((prevCourse) => ({ ...prevCourse, [name]: value }));
   };
 
+  // Handle form submission to update course
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      // Send PUT request to update a course
       const response = await fetch(`http://localhost:5000/api/courses/${id}`, {
         method: "PUT",
         headers: {
@@ -84,6 +95,7 @@ const UpdateCourse = () => {
     <main>
       <div className="wrap">
         <h2>Update Course</h2>
+        {/* Display validation errors, if any */}
         <ValidationErrors errors={errors} />
         <form onSubmit={handleSubmit}>
           <div className="main--flex">

@@ -1,6 +1,6 @@
-# School Database Client
+# School Database
 
-A React client for interacting with the School Database REST API. This full stack application allows users to administer a school database containing information about courses. Users can retrieve a list of courses, view details for a specific course, and create, update, and delete courses in the database.
+This full stack application allows users to administer a school database containing information about courses. Users can retrieve a list of courses, view details for a specific course, and create, update, and delete courses in the database.
 
 ## Features
 
