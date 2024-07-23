@@ -28,7 +28,11 @@ export const AuthProvider = ({ children }) => {
       if (response.ok) {
         const data = await response.json();
         // Store user data and credentials in localStorage
-        localStorage.setItem("user", JSON.stringify({ ...data, emailAddress }));
+        // (password is stored for learning purposes only and should not be stored in production environments)
+        localStorage.setItem(
+          "user",
+          JSON.stringify({ ...data, emailAddress, password })
+        );
         // Update user state with the fetched data
         setUser({ ...data, emailAddress, password });
         return data;
