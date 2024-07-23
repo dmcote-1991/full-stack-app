@@ -34,11 +34,6 @@ const CreateCourse = () => {
         body: JSON.stringify(course),
       });
 
-      ////////
-      console.log("Response Status:", response.status);
-      console.log("Response Headers:", [...response.headers.entries()]);
-      ////////
-
       if (response.status === 201) {
         const location = response.headers.get("Location");
         if (location) {

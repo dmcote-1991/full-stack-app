@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 const UpdateCourse = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { user: authUser } = useAuth();
   const [course, setCourse] = useState({
     title: "",
     description: "",
@@ -41,6 +43,9 @@ const UpdateCourse = () => {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Basic ${btoa(
+            `${authUser.emailAddress}:${authUser.password}`
+          )}`,
         },
         body: JSON.stringify(course),
       });
@@ -62,10 +67,10 @@ const UpdateCourse = () => {
         <form onSubmit={handleSubmit}>
           <div className="main--flex">
             <div>
-              <label htmlFor="courseTitle">Course Title</label>
+              <label htmlFor="title">Course Title</label>
               <input
-                id="courseTitle"
-                name="courseTitle"
+                id="title"
+                name="title"
                 type="text"
                 value={course.title}
                 onChange={handleChange}
@@ -75,10 +80,10 @@ const UpdateCourse = () => {
                 By {course.user.firstName} {course.user.lastName}
               </p>
 
-              <label htmlFor="courseDescription">Course Description</label>
+              <label htmlFor="description">Course Description</label>
               <textarea
-                id="courseDescription"
-                name="courseDescription"
+                id="description"
+                name="description"
                 value={course.description}
                 onChange={handleChange}
               />

@@ -28,23 +28,31 @@ const CourseDetail = () => {
   }, [id]);
 
   const handleDelete = async () => {
-    try {
-      const response = await fetch(`http://localhost:5000/api/courses/${id}`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Basic ${btoa(
-            `${authUser.emailAddress}:${authUser.password}`
-          )}`,
-        },
-      });
-      if (response.ok) {
-        navigate("/");
-      } else {
-        console.error("Error deleting course:", response.statusText);
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this course? Deleting courses cannot be undone."
+    );
+    if (confirmDelete) {
+      try {
+        const response = await fetch(
+          `http://localhost:5000/api/courses/${id}`,
+          {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Basic ${btoa(
+                `${authUser.emailAddress}:${authUser.password}`
+              )}`,
+            },
+          }
+        );
+        if (response.ok) {
+          navigate("/");
+        } else {
+          console.error("Error deleting course:", response.statusText);
+        }
+      } catch (error) {
+        console.error("Error deleting course:", error);
       }
-    } catch (error) {
-      console.error("Error deleting course:", error);
     }
   };
 
