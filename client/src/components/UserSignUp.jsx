@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import ValidationErrors from "./ValidationErrors";
 
 const UserSignUp = () => {
   const { signIn } = useAuth();
@@ -8,7 +9,7 @@ const UserSignUp = () => {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [errors, setErrors] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -29,15 +30,17 @@ const UserSignUp = () => {
         body: JSON.stringify(newUser),
       });
 
-      if (response.ok) {
-        await signIn({ email, password });
+      if (response.status === 201) {
+        await signIn(email, password);
         navigate("/");
-      } else {
+      } else if (response.status === 400) {
         const errorData = await response.json();
-        setError(errorData.message || "Sign-up failed");
+        setErrors(errorData.errors);
+      } else {
+        throw new Error("Failed to sign up");
       }
     } catch (error) {
-      setError("Sign-up failed. Please try again.");
+      console.error("Error signing up:", error);
     }
   };
 
@@ -45,7 +48,7 @@ const UserSignUp = () => {
     <main>
       <div className="form--centered">
         <h2>Sign Up</h2>
-        {error && <p className="error">{error}</p>}
+        <ValidationErrors errors={errors} />
         <form onSubmit={handleSubmit}>
           <label htmlFor="firstName">First Name</label>
           <input

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import ValidationErrors from "./ValidationErrors";
 
 const UpdateCourse = () => {
   const { id } = useParams();
@@ -13,6 +14,7 @@ const UpdateCourse = () => {
     materialsNeeded: "",
     user: {},
   });
+  const [errors, setErrors] = useState([]);
 
   useEffect(() => {
     const fetchCourseDetails = async () => {
@@ -52,6 +54,9 @@ const UpdateCourse = () => {
 
       if (response.ok) {
         navigate(`/courses/${id}`);
+      } else if (response.status === 400) {
+        const errorData = await response.json();
+        setErrors(errorData.errors);
       } else {
         throw new Error("Failed to update course");
       }
@@ -64,6 +69,7 @@ const UpdateCourse = () => {
     <main>
       <div className="wrap">
         <h2>Update Course</h2>
+        <ValidationErrors error={errors} />
         <form onSubmit={handleSubmit}>
           <div className="main--flex">
             <div>

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import ValidationErrors from "./ValidationErrors";
 
 const CreateCourse = () => {
   const { user: authUser } = useAuth();
@@ -62,16 +63,7 @@ const CreateCourse = () => {
     <main>
       <div className="wrap">
         <h2>Create Course</h2>
-        {errors.length > 0 && (
-          <div className="validation--errors">
-            <h3>Validation Errors</h3>
-            <ul>
-              {errors.map((error, index) => (
-                <li key={index}>{error}</li>
-              ))}
-            </ul>
-          </div>
-        )}
+        <ValidationErrors errors={errors} />
         <form onSubmit={handleSubmit}>
           <div className="main--flex">
             <div>
