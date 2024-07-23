@@ -22,16 +22,28 @@ const UpdateCourse = () => {
         const response = await fetch(`http://localhost:5000/api/courses/${id}`);
         if (response.ok) {
           const data = await response.json();
-          setCourse(data);
+          if (!data) {
+            navigate("/notfound");
+          } else if (authUser.id !== data.user.id) {
+            navigate("/forbidden");
+          } else {
+            setCourse(data);
+          }
+        } else if (response.status === 404) {
+          navigate("/notfound");
+        } else if (response.status === 500) {
+          navigate("/error");
         } else {
-          throw new Error("Failed to fetch course details");
+          console.error("Error fetching course:", response.statusText);
         }
       } catch (error) {
         console.error("Error fetching course:", error);
+        navigate("/error");
       }
     };
+
     fetchCourseDetails();
-  }, [id]);
+  }, [id, navigate, authUser.id]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -57,11 +69,14 @@ const UpdateCourse = () => {
       } else if (response.status === 400) {
         const errorData = await response.json();
         setErrors(errorData.errors);
+      } else if (response.status === 500) {
+        navigate("/error");
       } else {
-        throw new Error("Failed to update course");
+        console.error("Failed to update course");
       }
     } catch (error) {
       console.error("Error updating course:", error);
+      navigate("/error");
     }
   };
 
@@ -69,7 +84,7 @@ const UpdateCourse = () => {
     <main>
       <div className="wrap">
         <h2>Update Course</h2>
-        <ValidationErrors error={errors} />
+        <ValidationErrors errors={errors} />
         <form onSubmit={handleSubmit}>
           <div className="main--flex">
             <div>

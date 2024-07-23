@@ -1,22 +1,30 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Courses = () => {
   const [courses, setCourses] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchCourses = async () => {
       try {
         const response = await fetch("http://localhost:5000/api/courses");
-        const data = await response.json();
-        setCourses(data);
+        if (response.ok) {
+          const data = await response.json();
+          setCourses(data);
+        } else if (response.status === 500) {
+          navigate("/error");
+        } else {
+          console.error("Error fetching courses:", response.statusText);
+        }
       } catch (error) {
         console.error("Error fetching courses:", error);
+        navigate("/error");
       }
     };
 
     fetchCourses();
-  }, []);
+  }, [navigate]);
 
   if (courses.length === 0) {
     return <div>No courses available.</div>;

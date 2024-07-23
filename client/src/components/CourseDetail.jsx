@@ -15,17 +15,26 @@ const CourseDetail = () => {
         const response = await fetch(`http://localhost:5000/api/courses/${id}`);
         if (response.ok) {
           const data = await response.json();
-          setCourse(data);
+          if (!data) {
+            navigate("/notfound");
+          } else {
+            setCourse(data);
+          }
+        } else if (response.status === 404) {
+          navigate("/notfound");
+        } else if (response.status === 500) {
+          navigate("/error");
         } else {
           console.error("Error fetching course:", response.statusText);
         }
       } catch (error) {
         console.error("Error fetching course:", error);
+        navigate("/error");
       }
     };
 
     fetchCourse();
-  }, [id]);
+  }, [id, navigate]);
 
   const handleDelete = async () => {
     const confirmDelete = window.confirm(
@@ -49,9 +58,11 @@ const CourseDetail = () => {
           navigate("/");
         } else {
           console.error("Error deleting course:", response.statusText);
+          navigate("/error");
         }
       } catch (error) {
         console.error("Error deleting course:", error);
+        navigate("/error");
       }
     }
   };

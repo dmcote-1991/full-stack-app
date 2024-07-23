@@ -46,12 +46,15 @@ const CreateCourse = () => {
       } else if (response.status === 400) {
         const errorData = await response.json();
         setErrors(errorData.errors);
+      } else if (response.status === 500) {
+        navigate("/error");
       } else {
         throw new Error("Unexpected response");
       }
     } catch (error) {
       console.error("Error creating course:", error);
       setErrors(["Error creating course. Please try again."]);
+      navigate("/error");
     }
   };
 

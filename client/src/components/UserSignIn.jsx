@@ -12,12 +12,17 @@ const UserSignIn = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const user = await signIn({ emailAddress: email, password });
-    if (user) {
-      const redirectTo = location.state?.from?.pathname || "/";
-      navigate(redirectTo);
-    } else {
-      setError("Sign-in failed. Please try again");
+    try {
+      const user = await signIn({ emailAddress: email, password });
+      if (user) {
+        const redirectTo = location.state?.from?.pathname || "/";
+        navigate(redirectTo);
+      } else {
+        setError("Sign-in failed. Please try again");
+      }
+    } catch (error) {
+      console.error("Error signing in:", error);
+      navigate("/error");
     }
   };
 

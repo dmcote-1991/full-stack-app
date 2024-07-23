@@ -1,4 +1,4 @@
-const validationErrors = ({ errors }) => {
+const validationErrors = ({ errors = [] }) => {
   return (
     <div>
       {errors.length > 0 && (
@@ -6,7 +6,7 @@ const validationErrors = ({ errors }) => {
           <h3>Validation Errors</h3>
           <ul>
             {errors.map((error, index) => {
-              <li key={index}>{error}</li>;
+              return <li key={index}>{error}</li>;
             })}
           </ul>
         </div>

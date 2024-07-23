@@ -5,15 +5,22 @@ import ValidationErrors from "./ValidationErrors";
 
 const UserSignUp = () => {
   const { signIn } = useAuth();
+  const navigate = useNavigate();
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState("");
-  const navigate = useNavigate();
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [errors, setErrors] = useState([]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (password !== confirmPassword) {
+      setErrors(["Passwords do not match"]);
+      return;
+    }
+
     const newUser = {
       firstName,
       lastName,
@@ -31,16 +38,25 @@ const UserSignUp = () => {
       });
 
       if (response.status === 201) {
-        await signIn(email, password);
-        navigate("/");
+        const signInSuccess = await signIn({ emailAddress: email, password });
+        if (signInSuccess) {
+          navigate("/");
+        } else {
+          setErrors(["Failed to sign in after account creation."]);
+          navigate("/error");
+        }
       } else if (response.status === 400) {
         const errorData = await response.json();
         setErrors(errorData.errors);
+      } else if (response.status === 500) {
+        navigate("/error");
       } else {
-        throw new Error("Failed to sign up");
+        throw new Error("Unexpected response");
       }
     } catch (error) {
       console.error("Error signing up:", error);
+      setErrors(["Error signing up. Please try again."]);
+      navigate("/error");
     }
   };
 
@@ -84,6 +100,15 @@ const UserSignUp = () => {
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+          <label htmlFor="confirmPassword">Confirm Password</label>
+          <input
+            id="confirmPassword"
+            name="confirmPassword"
+            type="password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
             required
           />
           <button className="button" type="submit">
