@@ -44,13 +44,13 @@ const Courses = () => {
             className="course--module course--link"
             to={`/courses/${course.id}`}
           >
-            <h2 className="course--lable">Course</h2>
+            <h2 className="course--label">Course</h2>
             <h3 className="course--title">{course.title}</h3>
           </Link>
         ))}
         {/* Link to create a new course */}
         <Link
-          className="course--modeule course--add--module"
+          className="course--module course--add--module"
           to="/courses/create"
         >
           <span className="course--add--title">

@@ -30,7 +30,7 @@ const Header = () => {
               </li>
               <li>
                 <button
-                  className="button button-secondary"
+                  className="button-signout button-signout-secondary"
                   onClick={handleSignOut}
                 >
                   Sign Out

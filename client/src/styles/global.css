@@ -254,6 +254,22 @@ textarea {
     cursor: pointer;
 }
 
+ /* Sign-out button styles */
+.button-signout {
+    background: none;
+    font-size: .8rem;
+    border: 0;
+    display: block;
+}
+.button-signout-secondary {
+    color: #bca6dc;
+    transition: box-shadow 0.2s, color 0.2s;
+}
+.button-signout:hover {
+    color: #fff;
+    cursor: pointer;
+}
+
 /* Focus styles for input, button, and textarea */
 input:focus, button:focus, .button:focus, textarea:focus {
     border: none;
