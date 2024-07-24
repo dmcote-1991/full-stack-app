@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
-import { useAuth } from "../context/AuthContext";
+import useAuth from "../context/useAuth";
 
 const CourseDetail = () => {
   // Extract course ID from URL parameters
