@@ -79,7 +79,6 @@ const UserSignUp = () => {
             type="text"
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
-            // required
           />
           <label htmlFor="lastName">Last Name</label>
           <input
@@ -88,7 +87,6 @@ const UserSignUp = () => {
             type="text"
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
-            // required
           />
           <label htmlFor="emailAddress">Email Address</label>
           <input
@@ -97,7 +95,6 @@ const UserSignUp = () => {
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            // required
           />
           <label htmlFor="password">Password</label>
           <input
@@ -106,7 +103,6 @@ const UserSignUp = () => {
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            // required
           />
           <button className="button" type="submit">
             Sign Up
