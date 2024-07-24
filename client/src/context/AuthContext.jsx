@@ -1,4 +1,5 @@
 import { createContext, useState, useContext, useEffect } from "react";
+import PropTypes from "prop-types";
 
 // Create the AuthContext with default value of undefined
 const AuthContext = createContext();
@@ -68,6 +69,11 @@ export const AuthProvider = ({ children }) => {
       {children}
     </AuthContext.Provider>
   );
+};
+
+// Define prop types for AuthProvider
+AuthProvider.propTypes = {
+  children: PropTypes.node.isRequired,
 };
 
 // Custom hook to use the AuthContext
