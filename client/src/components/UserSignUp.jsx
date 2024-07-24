@@ -14,18 +14,11 @@ const UserSignUp = () => {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState([]);
 
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Check if password and confirmPassword match
-    if (password !== confirmPassword) {
-      setErrors(["Passwords do not match"]);
-      return;
-    }
 
     // Create new user object
     const newUser = {
@@ -86,7 +79,7 @@ const UserSignUp = () => {
             type="text"
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
-            required
+            // required
           />
           <label htmlFor="lastName">Last Name</label>
           <input
@@ -95,7 +88,7 @@ const UserSignUp = () => {
             type="text"
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
-            required
+            // required
           />
           <label htmlFor="emailAddress">Email Address</label>
           <input
@@ -104,7 +97,7 @@ const UserSignUp = () => {
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            required
+            // required
           />
           <label htmlFor="password">Password</label>
           <input
@@ -113,16 +106,7 @@ const UserSignUp = () => {
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-          <label htmlFor="confirmPassword">Confirm Password</label>
-          <input
-            id="confirmPassword"
-            name="confirmPassword"
-            type="password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            required
+            // required
           />
           <button className="button" type="submit">
             Sign Up
