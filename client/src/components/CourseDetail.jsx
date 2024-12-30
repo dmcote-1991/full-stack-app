@@ -96,22 +96,34 @@ const CourseDetail = () => {
           {/* Conditionally render Update and Delete buttons based on ownership */}
           {isCourseOwner() && (
             <>
-              <Link className="button" to={`/courses/${id}/update`}>
+              <Link 
+                className="button" 
+                to={`/courses/${id}/update`}
+                aria-label="Update this course"
+              >
                 Update Course
               </Link>
-              <button className="button" onClick={handleDelete}>
+              <button 
+                className="button" 
+                onClick={handleDelete}
+                aria-label="Delete this course"
+              >
                 Delete Course
               </button>
             </>
           )}
-          <Link className="button button-secondary" to="/">
+          <Link 
+            className="button button-secondary" 
+            to="/"
+            aria-label="Return to course list"
+          >
             Return to List
           </Link>
         </div>
       </div>
 
-      <div className="wrap">
-        <h2>Course Detail</h2>
+      <section className="wrap">
+        <h2 tabIndex="0">Course Detail</h2>
         <div className="main--flex">
           <div>
             <h3 className="course--detail--title">Course</h3>
@@ -128,14 +140,14 @@ const CourseDetail = () => {
           </div>
           <div>
             <h3 className="course--detail--title">Estimated Time</h3>
-            <p>{course.estimatedTime}</p>
+            <p>{course.estimatedTime || "Not provided"}</p>
 
             <h3 className="course--detail--title">Materials Needed</h3>
             {/* Render materials needed using ReactMarkdown */}
             <ReactMarkdown>{materialsMarkdown}</ReactMarkdown>
           </div>
         </div>
-      </div>
+      </section>
     </main>
   );
 };
