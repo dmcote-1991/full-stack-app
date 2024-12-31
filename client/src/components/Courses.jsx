@@ -31,18 +31,26 @@ const Courses = () => {
 
   // Display message if no courses are available
   if (courses.length === 0) {
-    return <div>No courses available.</div>;
+    return (
+      <main>
+        <div className="wrap" role="region" aria-live="polite">
+          No Courses available.
+        </div>
+      </main>
+    );
   }
 
   return (
     <main>
-      <div className="wrap main--grid">
+      <div className="wrap main--grid" role="grid">
         {/* Map through courses and create a link for each course */}
         {courses.map((course) => (
           <Link
             key={course.id}
             className="course--module course--link"
             to={`/courses/${course.id}`}
+            role="gridcell"
+            aria-label={`Course: ${course.title}`}
           >
             <h2 className="course--label">Course</h2>
             <h3 className="course--title">{course.title}</h3>
@@ -52,6 +60,8 @@ const Courses = () => {
         <Link
           className="course--module course--add--module"
           to="/courses/create"
+          role="gridcell"
+          aria-label="Create a new course"
         >
           <span className="course--add--title">
             <svg
@@ -61,6 +71,8 @@ const Courses = () => {
               y="0px"
               viewBox="0 0 13 13"
               className="add"
+              role="img"
+              aria-label="Add new course icon"
             >
               <polygon points="7,6 7,0 6,0 6,6 0,6 0,7 6,7 6,13 7,13 7,7 13,7 13,6 "></polygon>
             </svg>
