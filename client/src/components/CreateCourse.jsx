@@ -91,11 +91,8 @@ const CreateCourse = () => {
                   onChange={(e) => setTitle(e.target.value)}
                   required
                   aria-required="true"
-                  aria-describedby="courseTitle-desc"
+                  placeholder="Enter a descriptive title for the course."
                 />
-                <p id="courseTitle-desc" className="sr-only" hidden>
-                  Enter a descriptive title for the course.
-                </p>
 
                 <p>
                   By {authUser.firstName} {authUser.lastName}
@@ -110,9 +107,11 @@ const CreateCourse = () => {
                   required
                   aria-required="true"
                   aria-describedby="courseDescription-desc"
+                  placeholder="Provide a detailed description of the course."
                 ></textarea>
-                <p id="courseDescription-desc" className="sr-only" hidden>
-                  Provide a detailed description of the course
+                <p id="courseDescription-desc" className="sr-only">
+                  Provide a detailed description that outlines the course's
+                  content and goals.
                 </p>
               </div>
               <div>
@@ -123,11 +122,8 @@ const CreateCourse = () => {
                   type="text"
                   value={estimatedTime}
                   onChange={(e) => setEstimatedTime(e.target.value)}
-                  aria-describedby="estimatedTime-desc"
+                  placeholder="Enter the estimated time to complete the course."
                 />
-                <p id="estimatedTime-desc" className="sr-only" hidden>
-                  Enter the estimated time to complete the course.
-                </p>
 
                 <label htmlFor="materialsNeeded">Materials Needed</label>
                 <textarea
@@ -136,9 +132,11 @@ const CreateCourse = () => {
                   value={materialsNeeded}
                   onChange={(e) => setMaterialsNeeded(e.target.value)}
                   aria-describedby="materialsNeeded-desc"
+                  placeholder="List the materials required for the course."
                 ></textarea>
-                <p id="materialsNeeded-desc" className="sr-only" hidden>
-                  List the materials required for the course.
+                <p id="materialsNeeded-desc" className="sr-only">
+                  Specify any materials or resources required to complete the
+                  course.
                 </p>
               </div>
             </div>
