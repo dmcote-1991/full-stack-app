@@ -77,49 +77,72 @@ const CreateCourse = () => {
       <div className="wrap">
         <h2>Create Course</h2>
         <ValidationErrors errors={errors} />
-        <form onSubmit={handleSubmit}>
-          <div className="main--flex">
-            <div>
-              <label htmlFor="courseTitle">Course Title</label>
-              <input
-                id="courseTitle"
-                name="courseTitle"
-                type="text"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-              />
+        <form onSubmit={handleSubmit} aria-labelledby="create-course-form">
+          <fieldset>
+            <legend id="create-course-form" hidden>Course Information</legend>
+            <div className="main--flex">
+              <div>
+                <label htmlFor="courseTitle">Course Title</label>
+                <input
+                  id="courseTitle"
+                  name="courseTitle"
+                  type="text"
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                  required
+                  aria-required="true"
+                  aria-describedby="courseTitle-desc"
+                />
+                <p id="courseTitle-desc" className="sr-only" hidden>
+                  Enter a descriptive title for the course.
+                </p>
 
-              <p>
-                By {authUser.firstName} {authUser.lastName}
-              </p>
+                <p>
+                  By {authUser.firstName} {authUser.lastName}
+                </p>
 
-              <label htmlFor="courseDescription">Course Description</label>
-              <textarea
-                id="courseDescription"
-                name="courseDescription"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-              ></textarea>
+                <label htmlFor="courseDescription">Course Description</label>
+                <textarea
+                  id="courseDescription"
+                  name="courseDescription"
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                  required
+                  aria-required="true"
+                  aria-describedby="courseDescription-desc"
+                ></textarea>
+                <p id="courseDescription-desc" className="sr-only" hidden>
+                  Provide a detailed description of the course
+                </p>
+              </div>
+              <div>
+                <label htmlFor="estimatedTime">Estimated Time</label>
+                <input
+                  id="estimatedTime"
+                  name="estimatedTime"
+                  type="text"
+                  value={estimatedTime}
+                  onChange={(e) => setEstimatedTime(e.target.value)}
+                  aria-describedby="estimatedTime-desc"
+                />
+                <p id="estimatedTime-desc" className="sr-only" hidden>
+                  Enter the estimated time to complete the course.
+                </p>
+
+                <label htmlFor="materialsNeeded">Materials Needed</label>
+                <textarea
+                  id="materialsNeeded"
+                  name="materialsNeeded"
+                  value={materialsNeeded}
+                  onChange={(e) => setMaterialsNeeded(e.target.value)}
+                  aria-describedby="materialsNeeded-desc"
+                ></textarea>
+                <p id="materialsNeeded-desc" className="sr-only" hidden>
+                  List the materials required for the course.
+                </p>
+              </div>
             </div>
-            <div>
-              <label htmlFor="estimatedTime">Estimated Time</label>
-              <input
-                id="estimatedTime"
-                name="estimatedTime"
-                type="text"
-                value={estimatedTime}
-                onChange={(e) => setEstimatedTime(e.target.value)}
-              />
-
-              <label htmlFor="materialsNeeded">Materials Needed</label>
-              <textarea
-                id="materialsNeeded"
-                name="materialsNeeded"
-                value={materialsNeeded}
-                onChange={(e) => setMaterialsNeeded(e.target.value)}
-              ></textarea>
-            </div>
-          </div>
+          </fieldset>
           <button className="button" type="submit">
             Create Course
           </button>
