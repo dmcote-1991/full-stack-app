@@ -11,10 +11,10 @@
 
 const NotFound = () => {
   return (
-    <main>
+    <main role="main">
       <div className="wrap">
-        <h2>Not Found</h2>
-        <p>Sorry! We couldn&apos;t find the page you&apos;re looking for.</p>
+        <h2>Page Not Found</h2>
+        <p>Sorry! We couldn&apos;t find the page you were looking for.</p>
       </div>
     </main>
   );

@@ -110,7 +110,7 @@ const CreateCourse = () => {
                   placeholder="Provide a detailed description of the course."
                 ></textarea>
                 <p id="courseDescription-desc" className="sr-only">
-                  Provide a detailed description that outlines the course's
+                  Provide a detailed description that outlines the course&apos;s
                   content and goals.
                 </p>
               </div>

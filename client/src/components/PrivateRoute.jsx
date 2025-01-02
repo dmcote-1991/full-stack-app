@@ -13,7 +13,14 @@ const PrivateRoute = () => {
   }
   // If the user is not authenticated, redirect to the sign-in page
   // Pass the current location in state to allow redirection back after signing in
-  return <Navigate to="/signin" state={{ from: location }} />;
+  return (
+    <Navigate 
+      to="/signin" 
+      state={{ from: location }} 
+      replace 
+      aria-label="Redirecting to Sign In" 
+      />
+  );
 };
 
 export default PrivateRoute;

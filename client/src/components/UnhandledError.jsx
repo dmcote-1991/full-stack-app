@@ -11,10 +11,10 @@
 
 const UnhandledError = () => {
   return (
-    <main>
+    <main role="main">
       <div className="wrap">
-        <h2>Error</h2>
-        <p>Sorry! We just encountered an unexpected error.</p>
+        <h2>Unexpected Error</h2>
+        <p>Sorry! We just encountered an unexpected error. Please try again later.</p>
       </div>
     </main>
   );

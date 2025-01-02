@@ -12,14 +12,14 @@
 
 const validationErrors = ({ errors = [] }) => {
   return (
-    <div>
+    <div aria-live="polite" aria-atomic="true">
       {errors.length > 0 && (
-        <div className="validation--errors">
+        <div className="validation--errors" role="alert">
           <h3>Validation Errors</h3>
           <ul>
-            {errors.map((error, index) => {
-              return <li key={index}>{error}</li>;
-            })}
+            {errors.map((error, index) => (
+              <li key={index}>{error}</li>
+            ))}
           </ul>
         </div>
       )}
