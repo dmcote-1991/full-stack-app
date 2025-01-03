@@ -15,23 +15,26 @@ const Header = () => {
   };
 
   return (
-    <header>
+    <header role="banner">
       <div className="wrap header--flex">
         <h1 className="header--logo">
           {/* Link to navigate to the homepage */}
-          <Link to="/">Courses</Link>
+          <Link to="/" aria-label="Go to homepage">Courses</Link>
         </h1>
-        <nav>
+        <nav role="navigation" aria-label="Main navigation">
           {user ? (
             // Render for users who are signed in
             <ul className="header--signedin">
               <li>
-                Welcome, {user.firstName} {user.lastName}!
+                <span>
+                  Welcome, <span aria-label={`User first name: ${user.firstName}, last name: ${user.lastName}`}>{user.firstName} {user.lastName}</span>!
+                </span>
               </li>
               <li>
                 <button
                   className="button-signout button-signout-secondary"
                   onClick={handleSignOut}
+                  aria-label="Sign out"
                 >
                   Sign Out
                 </button>
@@ -41,10 +44,10 @@ const Header = () => {
             // Render for users who are not signed in
             <ul className="header--signedout">
               <li>
-                <Link to="/signup">Sign Up</Link>
+                <Link to="/signup" aria-label="Sign up for an account">Sign Up</Link>
               </li>
               <li>
-                <Link to="/signin">Sign In</Link>
+                <Link to="/signin" aria-label="Sign in to your account">Sign In</Link>
               </li>
             </ul>
           )}
