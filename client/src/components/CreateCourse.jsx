@@ -75,45 +75,47 @@ const CreateCourse = () => {
   return (
     <main>
       <div className="wrap">
-        <h2>Create Course</h2>
+        <h2 id="page-title">Create Course</h2>
         <ValidationErrors errors={errors} />
-        <form onSubmit={handleSubmit} aria-labelledby="create-course-form">
+        <form onSubmit={handleSubmit} aria-labelledby="page-title">
           <fieldset>
-            <legend id="create-course-form" hidden>Course Information</legend>
+            <legend className="sr-only" hidden>Course Information</legend>
             <div className="main--flex">
               <div>
-                <label htmlFor="courseTitle">Course Title</label>
+                <label htmlFor="title">Course Title <span aria-hidden="true">*</span></label>
                 <input
-                  id="courseTitle"
-                  name="courseTitle"
+                  id="title"
+                  name="title"
                   type="text"
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
                   required
                   aria-required="true"
-                  placeholder="Enter a descriptive title for the course."
+                  aria-describedby="title-desc"
                 />
+                <p id="title-desc">
+                  Enter a descriptive title for the course. This field is required.
+                </p>
 
                 <p>
                   By {authUser.firstName} {authUser.lastName}
                 </p>
 
-                <label htmlFor="courseDescription">Course Description</label>
+                <label htmlFor="description">Course Description <span aria-hidden="true">*</span></label>
                 <textarea
-                  id="courseDescription"
-                  name="courseDescription"
+                  id="description"
+                  name="description"
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
                   required
                   aria-required="true"
                   aria-describedby="courseDescription-desc"
-                  placeholder="Provide a detailed description of the course."
                 ></textarea>
-                <p id="courseDescription-desc" className="sr-only">
-                  Provide a detailed description that outlines the course&apos;s
-                  content and goals.
+                <p id="description-desc">
+                  Provide a detailed description of the course. This field is required.
                 </p>
               </div>
+
               <div>
                 <label htmlFor="estimatedTime">Estimated Time</label>
                 <input
@@ -122,8 +124,11 @@ const CreateCourse = () => {
                   type="text"
                   value={estimatedTime}
                   onChange={(e) => setEstimatedTime(e.target.value)}
-                  placeholder="Enter the estimated time to complete the course."
+                  aria-describedby="estimatedTime-desc"
                 />
+                <p id="estimatedTime-desc">
+                  Specify the estimated time needed to complete the course.
+                </p>
 
                 <label htmlFor="materialsNeeded">Materials Needed</label>
                 <textarea
@@ -132,16 +137,15 @@ const CreateCourse = () => {
                   value={materialsNeeded}
                   onChange={(e) => setMaterialsNeeded(e.target.value)}
                   aria-describedby="materialsNeeded-desc"
-                  placeholder="List the materials required for the course."
                 ></textarea>
-                <p id="materialsNeeded-desc" className="sr-only">
-                  Specify any materials or resources required to complete the
-                  course.
+                <p id="materialsNeeded-desc">
+                  List the materials needed for the course.
                 </p>
               </div>
             </div>
           </fieldset>
-          <button className="button" type="submit">
+
+          <button className="button" type="submit" aria-label="Create course">
             Create Course
           </button>
           <button
@@ -150,6 +154,7 @@ const CreateCourse = () => {
               e.preventDefault();
               navigate("/");
             }}
+            aria-label="Cancel and go back to course details"
           >
             Cancel
           </button>
