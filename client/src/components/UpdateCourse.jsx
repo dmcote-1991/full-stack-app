@@ -94,33 +94,44 @@ const UpdateCourse = () => {
   return (
     <main>
       <div className="wrap">
-        <h2>Update Course</h2>
+        <h2 id="page-title">Update Course</h2>
         {/* Display validation errors, if any */}
         <ValidationErrors errors={errors} />
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} aria-labelledby="page-title">
           <div className="main--flex">
             <div>
-              <label htmlFor="title">Course Title</label>
+              <label htmlFor="title">Course Title <span aria-hidden="true">*</span></label>
               <input
                 id="title"
                 name="title"
                 type="text"
                 value={course.title}
                 onChange={handleChange}
+                aria-required="true"
+                aria-describedby="title-desc"
               />
+              <p id="title-desc">
+                Enter the title of the course. This field is required.
+              </p>
 
               <p>
                 By {course.user.firstName} {course.user.lastName}
               </p>
 
-              <label htmlFor="description">Course Description</label>
+              <label htmlFor="description">Course Description <span aria-hidden="true">*</span></label>
               <textarea
                 id="description"
                 name="description"
                 value={course.description}
                 onChange={handleChange}
+                aria-required="true"
+                aria-describedby="description-desc"
               />
+              <p id="description-desc">
+                Provide a detailed description of the course. This field is required.
+              </p>
             </div>
+
             <div>
               <label htmlFor="estimatedTime">Estimated Time</label>
               <input
@@ -129,7 +140,11 @@ const UpdateCourse = () => {
                 type="text"
                 value={course.estimatedTime}
                 onChange={handleChange}
+                aria-describedby="estimatedTime-desc"
               />
+              <p id="estimatedTime-desc">
+                Enter the estimated time to complete the course.
+              </p>
 
               <label htmlFor="materialsNeeded">Materials Needed</label>
               <textarea
@@ -137,10 +152,15 @@ const UpdateCourse = () => {
                 name="materialsNeeded"
                 value={course.materialsNeeded}
                 onChange={handleChange}
+                aria-describedby="materialsNeeded-desc"
               />
+              <p id="materialsNeeded-desc">
+                List the materials needed for the course.
+              </p>
             </div>
           </div>
-          <button className="button" type="submit">
+
+          <button className="button" type="submit" aria-label="Update course">
             Update Course
           </button>
           <button
@@ -149,6 +169,7 @@ const UpdateCourse = () => {
               e.preventDefault();
               navigate(`/courses/${id}`);
             }}
+            aria-label="Cancel and go back to course details"
           >
             Cancel
           </button>

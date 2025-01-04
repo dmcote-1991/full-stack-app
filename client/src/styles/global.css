@@ -218,6 +218,25 @@ textarea {
     min-height: 300px;
 }
 
+input + p,
+textarea + p {
+    font-size: 0.875rem;
+    color: #555;
+    margin-top: 0.25rem;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+}
+
+input[aria-required="true"] + p,
+textarea[aria-required="true"] + p {
+    font-weight: 600;
+}
+
+input:focus + p,
+textarea:focus + p {
+    color: #0066cc;
+}
+
 /* Button styles */
 .button {
     background: #7c689b;
