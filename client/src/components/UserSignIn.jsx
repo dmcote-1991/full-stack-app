@@ -34,13 +34,25 @@ const UserSignIn = () => {
   };
 
   return (
-    <main>
+    <main role="main">
       <div className="form--centered">
         <h2>Sign In</h2>
         {/* Display error message if there is one */}
-        {error && <p className="error">{error}</p>}
+        {error && (
+          <div
+            role="alert"
+            aria-live="assertive"
+            className="error"
+          >
+            {error}
+          </div>
+        )}
+
         <form onSubmit={handleSubmit}>
-          <label htmlFor="emailAddress">Email Address</label>
+          <label htmlFor="emailAddress">
+            Email Address
+            <span className="visually-hidden"> (required)</span>
+          </label>
           <input
             id="emailAddress"
             name="emailAddress"
@@ -48,8 +60,17 @@ const UserSignIn = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
+            aria-required="true"
+            aria-describedby="emailHelp"
           />
-          <label htmlFor="password">Password</label>
+          <small id="emailHelp" className="sr-only">
+            Enter your email address.
+          </small>
+
+          <label htmlFor="password">
+            Password
+            <span className="visually-hidden"> (required)</span>
+          </label>
           <input
             id="password"
             name="password"
@@ -57,7 +78,15 @@ const UserSignIn = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
+            aria-required="true"
+            aria-describedby="passwordHelp"
           />
+          <small id="passwordHelp" className="sr-only">
+            Enter your password.
+          </small>
+
+          <br />
+
           <button className="button" type="submit">
             Sign In
           </button>
@@ -67,13 +96,17 @@ const UserSignIn = () => {
               e.preventDefault();
               navigate("/");
             }}
+            aria-label="Cancel and return to homepage"
           >
             Cancel
           </button>
         </form>
         <p>
           Don&apos;t have a user account? Click here to{" "}
-          <Link to="/signup">sign up</Link>!
+          <Link to="/signup" aria-label="Sign up for a new user account">
+            sign up
+          </Link>
+          !
         </p>
       </div>
     </main>
