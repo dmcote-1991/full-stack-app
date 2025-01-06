@@ -310,7 +310,7 @@ textarea:focus + p {
     border: 0;
 }
 
-/* Small text and element styles */
+/* Screen-reader only element styles */
 .sr-only {
     visibility: hidden;
     font-size: 0.75rem;

@@ -66,60 +66,105 @@ const UserSignUp = () => {
   };
 
   return (
-    <main>
+    <main role="main">
       <div className="form--centered">
         <h2>Sign Up</h2>
         {/* Display validation errors, if any */}
         <ValidationErrors errors={errors} />
+
         <form onSubmit={handleSubmit}>
-          <label htmlFor="firstName">First Name</label>
+          <label htmlFor="firstName">
+            First Name
+            <span className="visually-hidden"> (required)</span>
+          </label>
           <input
             id="firstName"
             name="firstName"
             type="text"
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
+            required
+            aria-required="true"
+            aria-describedby="firstNameHelp"
           />
-          <label htmlFor="lastName">Last Name</label>
+          <small id="firstNameHelp" className="sr-only">
+            Enter your first name.
+          </small>
+
+          <label htmlFor="lastName">
+            Last Name
+            <span className="visually-hidden"> (required)</span>
+          </label>
           <input
             id="lastName"
             name="lastName"
             type="text"
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
+            required
+            aria-required="true"
+            aria-describedby="lastNameHelp"
           />
-          <label htmlFor="emailAddress">Email Address</label>
+          <small id="lastNameHelp" className="sr-only">
+            Enter your last name.
+          </small>
+
+          <label htmlFor="emailAddress">
+            Email Address
+            <span className="visually-hidden"> (required)</span>
+          </label>
           <input
             id="emailAddress"
             name="emailAddress"
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            required
+            aria-required="true"
+            aria-describedby="emailHelp"
           />
-          <label htmlFor="password">Password</label>
+          <small id="emailHelp" className="sr-only">
+            Enter your email address.
+          </small>
+
+          <label htmlFor="password">
+            Password
+          </label>
           <input
             id="password"
             name="password"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            required
+            aria-required="true"
+            aria-describedby="passwordHelp"
           />
+          <small id="passwordHelp" className="sr-only">
+            Enter your password.
+          </small>
+
           <button className="button" type="submit">
             Sign Up
-          </button>
+          </button> 
           <button
             className="button button-secondary"
             onClick={(e) => {
               e.preventDefault();
               navigate("/");
             }}
+            aria-label="Cancel and return to homepage"
           >
             Cancel
           </button>
         </form>
+
         <p>
           Already have a user account? Click here to{" "}
-          <Link to="/signin">sign in</Link>!
+          <Link to="/signin" aria-label="Sign in to your account">
+            sign in
+          </Link>
+          !
         </p>
       </div>
     </main>
