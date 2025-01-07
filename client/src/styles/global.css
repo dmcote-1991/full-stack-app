@@ -12,6 +12,9 @@ html {
 /* Font settings for the body */
 body {
     font-family: 'Work Sans', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #fff;
 }
 
 /* Heading 2 styles */
@@ -19,20 +22,28 @@ h2 {
     font-size: 1.5rem;
     font-weight: 700;
     margin-bottom: 1rem;
+    color: #2b2b2b;
 }
 
 /* Paragraph styles */
 p {
-    font-weight: 300;
+    font-weight: 400;
     margin-bottom: 1.5rem;
-    line-height: 1.5;
+    line-height: 1.8;
     hyphens: auto; /* Allows text to break at appropriate places */
 }
 
 /* Anchor tag styles */
 a {
-    color: #939;
+    color: #63537d;
     text-decoration: none;
+}
+a:hover,
+a:focus {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 2px #63537d inset;
+    background-color: #57496e;
+    outline: 2px solid #63537d;
 }
 
 /* Wrapper styles for centering content */
@@ -62,18 +73,26 @@ header {
     font-size: 1.25rem;
     color: #fff;
 }
+.header--logo a:hover,
+.header--logo a:focus {
+    color: #ddd;
+    text-decoration: none;
+    outline: 2px dashed #ddd;
+}
 
 /* List item styles within the header */
 header li {
-    font-size: .8rem;
+    font-size: 0.9rem;
 }
 
 /* Navigation link styles within the header */
 header nav a {
-    color: #dbd;
-}
-header nav a:hover {
     color: #fff;
+}
+header nav a:hover,
+header nav a:focus {
+    color: #ccc;
+    outline: 2px dashed #ccc;
 }
 
 /* Styles for signed-in user list items in the header */
@@ -118,6 +137,11 @@ header nav a:hover {
     color: #57496e;
     font-weight: 300;
     font-size: 1.25rem;
+}
+.course--add--module:focus,
+.course--add--module:hover {
+    background: #e9e6ef;
+    color: #111;
 }
 
 /* Styles for the add icon in course add module */
@@ -212,16 +236,17 @@ label {
 }
 
 /* Input and textarea styles */
-input, textarea {
+input, textarea, select {
     display: block;
     width: 100%;
-    color: #332a40;
-    border-radius: .5rem;
+    color: #333;
+    background-color: #fff;
+    border-radius: 0.25rem;
     border: 1px solid #8c789b;
-    padding: .5rem;
+    padding: 0.5rem;
     margin-bottom: 1rem;
     font-family: 'Work Sans', sans-serif;
-    font-size: .8rem;
+    font-size: 1rem;
 }
 textarea {
     min-height: 300px;
@@ -243,7 +268,7 @@ textarea[aria-required="true"] + p {
 
 input:focus + p,
 textarea:focus + p {
-    color: #0066cc;
+    color: #63537d;
 }
 
 /* Button styles */
@@ -252,14 +277,20 @@ textarea:focus + p {
     color: #fff;
     font-size: 1rem;
     padding: .75rem 1.5rem;
-    border: 0;
-    margin: 0 0 .5rem 0;
+    border: none;
+    margin: 0 0 0.5rem;
     display: block;
     width: 210px;
     text-align: center;
-    border-radius: .5rem;
+    border-radius: 0.5rem;
     font-weight: bold;
-    transition: background 0.2s;
+    transition: background 0.2s, transform 0.2s;
+}
+.button:hover,
+.button:focus {
+    background: #63537d;
+    transform: scale(1.05);
+    outline: 2px solid #63537d;
 }
 .button:last-child {
     margin-bottom: 0;
@@ -276,7 +307,9 @@ textarea:focus + p {
     box-shadow: 0 0 0 2px #7c689b inset;
     transition: box-shadow 0.2s, color 0.2s;
 }
-.button-secondary:hover {
+.button-secondary:hover,
+.button-secondary:focus {
+    background: #f4f1f9;
     color: #63537d;
     box-shadow: 0 0 0 2px #63537d inset;
     cursor: pointer;
@@ -328,13 +361,22 @@ input:focus, textarea:focus {
     background: #f4f1f9;
 }
 a:hover {
-    text-decoration: underline;
+    text-decoration: none;
     /* color: #57496e; */
 }
 .button-secondary:hover {
     color: #57496e;
     box-shadow: 0 0 0 2px #57496e inset;
     background: #f4f1f9;
+}
+
+/* Focus styles for interactive elements */
+input:focus,
+button:focus,
+textarea:focus,
+select:focus {
+    outline: 2px solid #57496e;
+    outline-offset: 2px;
 }
 
 /* Media query for screen sizes 600px and above */
