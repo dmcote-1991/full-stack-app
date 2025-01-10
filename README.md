@@ -82,6 +82,7 @@ full-stack-app/
 │ ├── index.html # Entry point HTML file 
 │ ├── package-lock.json # Dependency lock file 
 │ ├── package.json # Dependency manifest 
+│ ├── README.md # Frontend README 
 │ └── vite.config.js # Vite configuration 
 ├── node_modules/ # Project dependencies (auto-generated) 
 ├── .gitignore # Git ignore rules 
