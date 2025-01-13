@@ -14,14 +14,6 @@ A REST API for administering a school database containing information about user
 - **Authentication**: bcrypt
 - **Package Manager**: npm
 
-## Installation
-
-1. **Clone the repository:**
-   ```sh
-   git clone https://github.com/dmcote-1991/rest-api.git
-   cd rest-api
-   ```
-
 ## Project Structure
 
 ```bash
