@@ -17,7 +17,6 @@ The backend for the School Database application provides a RESTful API to manage
 - **bcrypt**: Secure password hashing.
 - **nodemon**: Automatic server restarts during development.
 
-<<<<<<< HEAD
 ## Installation
 
 ### Prerequisites
@@ -43,8 +42,6 @@ Ensure you have the following installed:
    npm start
    ```
 
-=======
->>>>>>> f5f74a37a3406f948aabb64818be9a191c26c9b9
 ## Project Structure
 
 ```bash
