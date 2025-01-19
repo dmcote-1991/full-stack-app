@@ -85,6 +85,7 @@ full-stack-app/
 │ ├── nodemon.json # Nodemon configuration 
 │ ├── package-lock.json # Dependency lock file 
 │ ├── package.json # Dependency manifest 
+│ ├── .gitignore # Git ignore rules for the backend
 │ ├── README.md # Backend README 
 │ ├── RESTAPI.postman_collection.json # API collection for testing 
 │ └── tests.http # HTTP test scripts 
@@ -113,15 +114,15 @@ full-stack-app/
 │ │ │ └── reset.css 
 │ │ ├── App.jsx # Main React component 
 │ │ └── main.jsx # Entry point for the React app 
-│ ├── .eslintrc.cjs # ESLint configuration 
-│ ├── .gitignore # Git ignore rules 
 │ ├── index.html # Entry point HTML file 
 │ ├── package-lock.json # Dependency lock file 
 │ ├── package.json # Dependency manifest 
-│ ├── README.md # Frontend README 
-│ └── vite.config.js # Vite configuration 
+│ ├── .eslintrc.cjs # ESLint configuration 
+│ ├── .gitignore # Git ignore rules for the frontend
+│ ├── vite.config.js # Vite configuration 
+│ └── README.md # Frontend README 
 ├── node_modules/ # Project dependencies (auto-generated) 
-├── .gitignore # Git ignore rules 
+├── .gitignore # Git ignore rules for the entire project
 └── README.md # Project README
 ```
 

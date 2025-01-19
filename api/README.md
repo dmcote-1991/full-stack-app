@@ -65,6 +65,7 @@ api/
 ├── nodemon.json             # Nodemon configuration
 ├── package.json             # Dependency manifest
 ├── package-lock.json        # Dependency lock file
+├── .gitignore               # Git ignore rules
 ├── README.md                # Backend README
 ├── RESTAPI.postman_collection.json # API collection for testing
 └── tests.http               # HTTP test scripts

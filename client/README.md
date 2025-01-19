@@ -69,13 +69,13 @@ client/ # Frontend code
 │   │   └── reset.css
 │   ├── App.jsx # Main React component
 │   └── main.jsx # Entry point for the React app
-├── .eslintrc.cjs # ESLint configuration
-├── .gitignore # Git ignore rules
 ├── index.html # Entry point HTML file
 ├── package-lock.json # Dependency lock file
 ├── package.json # Dependency manifest
-├── README.md # Frontend README
-└── vite.config.js # Vite configuration
+├── .gitignore # Git ignore rules
+├── .eslintrc.cjs # ESLint configuration
+├── vite.config.js # Vite configuration
+└── README.md # Frontend README
 ```
 
 ### Notes
