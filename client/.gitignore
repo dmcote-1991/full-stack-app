@@ -48,10 +48,10 @@ coverage/
 # ESLint
 .eslintcache
 
-# Lockfiles (optional, if you're using npm only and not yarn/pnpm)
+# Lockfiles
 yarn.lock
 pnpm-lock.yaml
 
-# Ignore public directory build outputs (if any generated dynamically)
+# Ignore public directory build outputs
 public/*.js
 public/*.map

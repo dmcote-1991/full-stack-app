@@ -1,0 +1,44 @@
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment variables
+.env
+
+# Logs
+logs/
+*.log
+debug.log
+*.trace
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# Sequelize CLI
+/config/config.json
+
+# Editor directories and files
+.vscode/
+.idea/
+*.swp
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# API Testing
+RESTAPI.postman_collection.json
+tests.http
+
+# Temporary files
+*.tmp
+*.temp
+*.pid
+
+# Build files
+dist/
+build/
