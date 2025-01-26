@@ -36,14 +36,11 @@ p {
 /* Anchor tag styles */
 a {
     color: #63537d;
-    text-decoration: none;
+    text-decoration: underline;
 }
 a:hover,
 a:focus {
     transform: scale(1.05);
-    box-shadow: 0 0 0 2px #63537d inset;
-    background-color: #57496e;
-    outline: 2px solid #63537d;
 }
 
 /* Wrapper styles for centering content */
